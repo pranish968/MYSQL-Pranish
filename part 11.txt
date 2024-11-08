@@ -1,0 +1,39 @@
+2024-11-08 SQL
+
+CREATE DATABASE Loja;
+
+
+USE Loja;
+
+CREATE TABLE Clientes (
+    id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+    nome_cliente VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE Pedidos (
+    id_pedido INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT,
+    data_pedido DATE,
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente)
+);
+
+INSERT INTO Clientes (nome_cliente) VALUES
+('Alice'),
+('Bob'),
+('Charlie');
+
+INSERT INTO Pedidos (id_cliente, data_pedido) VALUES
+(1, '2024-11-01'),
+(2, '2024-11-02'),
+(1, '2024-11-05');
+
+
+SELECT c.nome_cliente, p.data_pedido, p.id_pedido
+FROM Clientes c
+JOIN Pedidos p ON c.id_cliente = p.id_cliente;
+
+
+SELECT c.nome_cliente, p.data_pedido, p.id_pedido
+FROM Clientes c
+LEFT JOIN Pedidos p ON c.id_cliente = p.id_cliente;
